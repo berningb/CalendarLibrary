@@ -1,0 +1,13 @@
+#calendar {
+    height: auto;
+    width: 800px;
+    background-color: red;
+    margin: auto;
+}
+
+td {
+    height: 100px;
+    width: 100px;
+    text-align: center;
+    border: 1px solid black;
+}
