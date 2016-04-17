@@ -1,7 +1,7 @@
 #calendar {
     height: auto;
     width: 800px;
-    background-color: red;
+    /*    background-color: red;*/
     margin: auto;
 }
 
@@ -10,4 +10,16 @@ td {
     width: 100px;
     text-align: center;
     border: 1px solid black;
+}
+
+.btn:hover {
+    background-color: red;
+}
+
+.first {
+    background-color: deepskyblue;
+}
+
+.notThisMonth {
+    background-color: grey;
 }

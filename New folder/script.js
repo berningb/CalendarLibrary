@@ -38,7 +38,6 @@ tbl.style.width = '100%';
 var table = document.createElement("TABLE");
 table.style.width = '100%';
 
-
 function Calendar(id, date) {
     makeDays(date);
 }
@@ -47,17 +46,22 @@ function makeDays(date) {
 
 
     //get date 
-    var month = date.getUTCMonth() + 1;
-    var day = date.getUTCDate();
-    var year = date.getUTCFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var year = date.getFullYear();
     var first = new Date(year + "-" + month + "-01").getDay();
-    var last = new Date(year + "-" + month).getDay();
-    console.log(first);
-    console.log(last);
+    var last = new Date(year, month, 0).getDate();
     console.log(day);
 
+    //get next and last month
+    var x = new Date();
+    x.setMonth(x.getMonth());
+    var lastMonth = x.getMonth();
+    var nextMonth = x.getMonth() + 1;
+
     //get days
-    var count = 1;
+    var count = 0;
+    var count2 = 1;
     var dayCount = 0;
 
     //gets list of days
@@ -84,19 +88,33 @@ function makeDays(date) {
 
         for (var j = 0; j < 7; j++) {
             var tbd = document.createElement('td');
+            tbd.className = 'tbd';
+            count++;
 
-            if (count < 31) {
-                tbd.innerHTML = count;
-                count++;
+            if (count <= first + 1) {
+                tbd.innerHTML = ""
+                tbd.className = 'notThisMonth';
+            }
 
-            } else {
-                tbd.innerHTML = "x"
+            if (count >= first + 1) {
+                if (count2 <= last) {
+                    if (count2 === day) {
+                        tbd.className = 'first btn';
+                        tbd.innerHTML = count2;
+                        count2++;
+                    } else {
+                        tbd.className = 'btn';
+                        tbd.innerHTML = count2;
+                        count2++;
+                    }
+                } else {
+                    tbd.innerHTML = ""
+                    tbd.className = 'notThisMonth';
+                }
             }
             tbr.appendChild(tbd);
-
         }
         table.appendChild(tbr);
-
     }
 
     document.getElementById('calendar').appendChild(tbl);
