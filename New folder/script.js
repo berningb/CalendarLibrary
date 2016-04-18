@@ -51,7 +51,11 @@ function makeDays(date) {
     var year = date.getFullYear();
     var first = new Date(year + "-" + month + "-01").getDay();
     var last = new Date(year, month, 0).getDate();
+    var lastDayOfLastMonth = new Date(year, month - 1, 0).getDate();
     console.log(day);
+    console.log(first);
+
+
 
     //get next and last month
     var x = new Date();
@@ -63,7 +67,12 @@ function makeDays(date) {
     var count = 0;
     var count2 = 1;
     var dayCount = 0;
+    var end = 1;
 
+
+
+    var prev = lastDayOfLastMonth - first + 1;
+    console.log(prev);
     //gets list of days
     for (var i = 0; i < 1; i++) {
         var tbr = document.createElement('tr');
@@ -90,13 +99,11 @@ function makeDays(date) {
             var tbd = document.createElement('td');
             tbd.className = 'tbd';
             count++;
-
-            if (count <= first + 1) {
-                tbd.innerHTML = ""
+            if (count < first + 1) {
+                tbd.innerHTML = prev;
                 tbd.className = 'notThisMonth';
-            }
-
-            if (count >= first + 1) {
+                prev++;
+            } else if (count >= first + 1) {
                 if (count2 <= last) {
                     if (count2 === day) {
                         tbd.className = 'first btn';
@@ -108,8 +115,9 @@ function makeDays(date) {
                         count2++;
                     }
                 } else {
-                    tbd.innerHTML = ""
+                    tbd.innerHTML = end;
                     tbd.className = 'notThisMonth';
+                    end++
                 }
             }
             tbr.appendChild(tbd);
@@ -119,6 +127,7 @@ function makeDays(date) {
 
     document.getElementById('calendar').appendChild(tbl);
     document.getElementById('calendar').appendChild(table);
+
 
 }
 

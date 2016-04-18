@@ -9,11 +9,13 @@ td {
     height: 100px;
     width: 100px;
     text-align: center;
+    -webkit-user-select: none;
     border: 1px solid black;
 }
 
 .btn:hover {
     background-color: red;
+    cursor: pointer;
 }
 
 .first {
