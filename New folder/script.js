@@ -34,13 +34,31 @@ var months = [
 var d = new Date();
 var mn = d.getMonth() + 1;
 
+
+
+var div = document.createElement('div');
+div.id = 'inside';
+var p = document.createElement('p');
+p.innerHTML = 'wow this better work';
+
+var span = document.createElement('span');
+span.innerHTML = 'X';
+div.appendChild(span);
+div.appendChild(p);
+
+var overlay = document.createElement('div');
+overlay.id = 'overlay';
+overlay.appendChild(div);
+
 var table = document.createElement("TABLE");
 table.id = 'table';
 table.style.width = '100%';
 
 var nxt = document.createElement("BUTTON");
-nxt.innerHTML = 'next';
+nxt.innerHTML = '&#x276f;';
 nxt.id = 'nxt';
+nxt.className = 'btn2';
+
 nxt.addEventListener("click", function () {
     mn++;
     makeDays(new Date(), mn);
@@ -48,15 +66,16 @@ nxt.addEventListener("click", function () {
 
 
 var prv = document.createElement("BUTTON");
-prv.innerHTML = 'prev';
+prv.innerHTML = '&#x276e;';
 prv.id = 'prv';
+prv.className = 'btn2';
 prv.addEventListener("click", function () {
     mn--;
     makeDays(new Date(), mn);
 });
 
-
 var title = document.createElement("div");
+
 
 title.className = 'title';
 
@@ -112,10 +131,14 @@ function makeDays(date, month) {
                         cell.className = 'first btn';
                         cell.innerHTML = count2;
                         count2++;
+
                     } else {
                         cell.className = 'btn';
                         cell.innerHTML = count2;
                         count2++;
+                        cell.onclick = function () {
+                            overlay.style.display = "block";
+                        }
                     }
                 } else {
                     cell.innerHTML = end;
@@ -132,9 +155,6 @@ function makeDays(date, month) {
 }
 
 function createCalendar() {
-
-
-
     var header = document.createElement('tr');
     for (var j = 0; j < 7; j++) {
         var tbd = document.createElement('th');
@@ -156,7 +176,14 @@ function createCalendar() {
     }
 }
 
+span.onclick = function () {
+    overlay.style.display = "none";
+}
+div.onclick = function () {
+    overlay.style.display = "none";
+}
 document.getElementById('calendar').appendChild(title);
+document.getElementById('calendar').appendChild(overlay);
 document.getElementById('calendar').appendChild(table);
 
 
