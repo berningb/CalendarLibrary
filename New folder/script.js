@@ -31,30 +31,51 @@ var months = [
     'November',
     'December'
 ];
-
-var tbl = document.createElement("TABLE");
-tbl.style.width = '100%';
+var d = new Date();
+var mn = d.getMonth() + 1;
 
 var table = document.createElement("TABLE");
+table.id = 'table';
 table.style.width = '100%';
 
+var nxt = document.createElement("BUTTON");
+nxt.innerHTML = 'next';
+nxt.id = 'nxt';
+nxt.addEventListener("click", function () {
+    mn++;
+    makeDays(new Date(), mn);
+});
+
+
+var prv = document.createElement("BUTTON");
+prv.innerHTML = 'prev';
+prv.id = 'prv';
+prv.addEventListener("click", function () {
+    mn--;
+    makeDays(new Date(), mn);
+});
+
+
+var title = document.createElement("div");
+
+title.className = 'title';
+
 function Calendar(id, date) {
-    makeDays(date);
+    var cal = document.getElementById('calendar');
+    var currentMonth = date.getMonth() + 1;
+    createCalendar();
+    makeDays(date, currentMonth);
+
 }
 
-function makeDays(date) {
-
+function makeDays(date, month) {
 
     //get date 
-    var month = date.getMonth() + 1;
     var day = date.getDate();
     var year = date.getFullYear();
     var first = new Date(year + "-" + month + "-01").getDay();
     var last = new Date(year, month, 0).getDate();
     var lastDayOfLastMonth = new Date(year, month - 1, 0).getDate();
-    console.log(day);
-    console.log(first);
-
 
 
     //get next and last month
@@ -66,85 +87,77 @@ function makeDays(date) {
     //get days
     var count = 0;
     var count2 = 1;
-    var dayCount = 0;
     var end = 1;
 
-
-
     var prev = lastDayOfLastMonth - first + 1;
-    console.log(prev);
-    //gets list of days
-    for (var i = 0; i < 1; i++) {
-        var tbr = document.createElement('tr');
-
-        for (var j = 0; j < 7; j++) {
-            var tbd = document.createElement('td');
-            if (dayCount < 7) {
-                tbd.innerHTML = days[j];
-                dayCount++;
-            }
-            tbr.appendChild(tbd);
-
-        }
-
-        tbl.appendChild(tbr);
-    }
-
-    //sets days
-    for (var i = 0; i < 6; i++) {
-        var tbr = document.createElement('tr');
-
-
-        for (var j = 0; j < 7; j++) {
-            var tbd = document.createElement('td');
-            tbd.className = 'tbd';
+    title.innerHTML = months[month - 1] + " " + year;
+    title.appendChild(prv);
+    title.appendChild(nxt);
+    var x = new Date();
+    var table = document.getElementById('table');
+    for (var i = 1, row; row = table.rows[i]; i++) {
+        for (var j = 0, cell; cell = row.cells[j]; j++) {
             count++;
             if (count < first + 1) {
-                tbd.innerHTML = prev;
-                tbd.className = 'notThisMonth';
+                cell.innerHTML = prev;
+                cell.className = 'notThisMonth';
                 prev++;
+                cell.onclick = function () {
+                    month--;
+                    makeDays(new Date(), month);
+                }
             } else if (count >= first + 1) {
                 if (count2 <= last) {
-                    if (count2 === day) {
-                        tbd.className = 'first btn';
-                        tbd.innerHTML = count2;
+                    if (count2 === day && months[month - 1] === months[x.getMonth()]) {
+                        cell.className = 'first btn';
+                        cell.innerHTML = count2;
                         count2++;
                     } else {
-                        tbd.className = 'btn';
-                        tbd.innerHTML = count2;
+                        cell.className = 'btn';
+                        cell.innerHTML = count2;
                         count2++;
                     }
                 } else {
-                    tbd.innerHTML = end;
-                    tbd.className = 'notThisMonth';
+                    cell.innerHTML = end;
+                    cell.className = 'notThisMonth';
+                    cell.onclick = function () {
+                        month++;
+                        makeDays(new Date(), month);
+                    }
                     end++
                 }
             }
-            tbr.appendChild(tbd);
         }
-        table.appendChild(tbr);
     }
-
-    document.getElementById('calendar').appendChild(tbl);
-    document.getElementById('calendar').appendChild(table);
-
-
-}
-
-function addEvent() {
-
-}
-
-function remEvent() {
-
-}
-
-function editEvent() {
-
 }
 
 function createCalendar() {
 
+
+
+    var header = document.createElement('tr');
+    for (var j = 0; j < 7; j++) {
+        var tbd = document.createElement('th');
+        tbd.innerHTML = days[j];
+        console.log(days[j]);
+        header.appendChild(tbd);
+    }
+    table.appendChild(header);
+
+
+
+    for (var i = 0; i < 6; i++) {
+        var tbr = document.createElement('tr');
+        for (var j = 0; j < 7; j++) {
+            var tbd = document.createElement('td');
+            tbr.appendChild(tbd);
+        }
+        table.appendChild(tbr);
+    }
 }
+
+document.getElementById('calendar').appendChild(title);
+document.getElementById('calendar').appendChild(table);
+
 
 Calendar(document.getElementById('calendar'), new Date());
