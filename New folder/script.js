@@ -35,33 +35,32 @@ var d = new Date();
 var mn = d.getMonth() + 1;
 
 
-
-var div = document.createElement('div');
-div.id = 'inside';
-var p = document.createElement('p');
-p.innerHTML = 'wow this better work';
-
-var span = document.createElement('span');
-span.innerHTML = 'X';
-div.appendChild(span);
-div.appendChild(p);
-
-var overlay = document.createElement('div');
-overlay.id = 'overlay';
-overlay.appendChild(div);
-
 var table = document.createElement("TABLE");
 table.id = 'table';
 table.style.width = '100%';
+
+var footer = document.createElement('div');
+footer.className = 'footer';
 
 var nxt = document.createElement("BUTTON");
 nxt.innerHTML = '&#x276f;';
 nxt.id = 'nxt';
 nxt.className = 'btn2';
 
+var displayDay = document.createElement('div');
+displayDay.className = "displayDay";
+var displayMonth = document.createElement('div');
+displayMonth.className = "displayMonth";
+
+
 nxt.addEventListener("click", function () {
-    mn++;
-    makeDays(new Date(), mn);
+    console.log(mn);
+    if (mn === 12) {
+        makeDays(new Date(), 12)
+    } else {
+        mn++;
+        makeDays(new Date(), mn);
+    }
 });
 
 
@@ -70,8 +69,14 @@ prv.innerHTML = '&#x276e;';
 prv.id = 'prv';
 prv.className = 'btn2';
 prv.addEventListener("click", function () {
-    mn--;
-    makeDays(new Date(), mn);
+    console.log(mn);
+
+    if (mn === 1) {
+        makeDays(new Date(), 1)
+    } else {
+        mn--;
+        makeDays(new Date(), mn);
+    }
 });
 
 var title = document.createElement("div");
@@ -109,9 +114,13 @@ function makeDays(date, month) {
     var end = 1;
 
     var prev = lastDayOfLastMonth - first + 1;
-    title.innerHTML = months[month - 1] + " " + year;
-    title.appendChild(prv);
-    title.appendChild(nxt);
+    displayMonth.innerHTML = months[month - 1] + " " + year;
+    displayDay.innerHTML = weekday[date.getDay()] + " " + day;
+    title.appendChild(displayDay);
+    title.appendChild(displayMonth);
+
+    footer.appendChild(prv);
+    footer.appendChild(nxt);
     var x = new Date();
     var table = document.getElementById('table');
     for (var i = 1, row; row = table.rows[i]; i++) {
@@ -136,9 +145,7 @@ function makeDays(date, month) {
                         cell.className = 'btn';
                         cell.innerHTML = count2;
                         count2++;
-                        cell.onclick = function () {
-                            overlay.style.display = "block";
-                        }
+                        cell.onclick = function () {}
                     }
                 } else {
                     cell.innerHTML = end;
@@ -175,16 +182,10 @@ function createCalendar() {
         table.appendChild(tbr);
     }
 }
-
-span.onclick = function () {
-    overlay.style.display = "none";
-}
-div.onclick = function () {
-    overlay.style.display = "none";
-}
 document.getElementById('calendar').appendChild(title);
-document.getElementById('calendar').appendChild(overlay);
 document.getElementById('calendar').appendChild(table);
+document.getElementById('calendar').appendChild(footer);
+
 
 
 Calendar(document.getElementById('calendar'), new Date());
