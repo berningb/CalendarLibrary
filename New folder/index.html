@@ -6,8 +6,107 @@
 </head>
 
 <body>
+    <div>
+        <div id="tit">
+            <h1>Calendar Library</h1>
+            <div class='best infoDiv'>
+                This is my calendar library. I wanted to add event abilities but that was actually a lot hard then I thought it would be. This library makes it simple toc reate a calendar and fill it with whatever kind of information you would like. I however, made it really easy to get the information for future and previous years. I found the date object really complicated and took it upon myself to make something a bit more firnedly. Enjoy :)
+            </div>
 
-    <div id="calendar"></div>
+            <h1>createCalendar</h1>
+            <div class='infoDiv left'>
+                Creates a grid made up of a 7 X 6 to look like a calendar.
+            </div>
+
+            <h1>createTitle()</h1>
+            <div class='infoDiv left'>
+                Creates a div on top of the calendar. THis div has two main divs inside which are the current day and the current month and year that you are looking at.
+            </div>
+            <h1>createFooter()</h1>
+            <div class='infoDiv left'>
+                A simple div that contains your two main buttons 'next, and 'previous'.
+            </div>
+            <h1>createCalendar()</h1>
+            <div class='infoDiv left'>
+                Creates a grid made up of a 7 X 6 to look like a calendar.
+            </div>
+            <h1>fillCalendar(date, month, year)</h1>
+            <div class='infoDiv left'>
+                Fills the table or 'calendar' with the appropriete information. takes in date object, month, and year.
+            </div>
+            <h1>fillTitle(date, month, year)</h1>
+            <div class='infoDiv left'>
+                appends and recieves all information for the title. Pass in a date, monht, and year.
+            </div>
+            <h1>fillFooter()</h1>
+            <div class='infoDiv left'>
+                actually appends the buttons to the div
+            </div>
+            <h1>Calendar(id, date)</h1>
+            <div class='infoDiv left'>
+                the basic constructor for the library. Takes in two params, an id and a date.
+            </div>
+            <h1>last()</h1>
+            <div class='infoDiv right'>
+                Does the action of appending the last month's info to the Calendar.
+            </div>
+
+            <h1>next()</h1>
+            <div class='infoDiv right'>
+                Does the action of appending the first month's info to the Calendar.
+            </div>
+            <h1>getCurrentYear()</h1>
+            <div class='infoDiv right'>
+                simple method to get the current year. returns a number
+            </div>
+            <h1>getNextYear()</h1>
+            <div class='infoDiv right'>
+                simple method to get the next year.Returns a number
+            </div>
+            <h1>getLastYear()</h1>
+            <div class='infoDiv right'>
+                simple method to get the previous year. Returns a number
+            </div>
+            <h1>getNextMonth()</h1>
+            <div class='infoDiv right'>
+                simple method to get the next month. returns number.
+            </div>
+            <h1>getCurrentMonth()</h1>
+            <div class='infoDiv right'>
+                simple method to get the current month. Returns a number.
+            </div>
+            <h1>getLastMonth()</h1>
+            <div class='infoDiv right'>
+                simple method to get the previous month. Returns a number
+            </div>
+            <h1>Implementation of Calendar()</h1>
+            <div class='infoDiv'>
+                <div>Calendar(document.getElementById('calendar') = <span>element id value</span>, new Date() = <span>date object</span>);</div>
+                <div>function Calendar(id, date) { }</div>
+                <div>function fillCalendar(date = <span>date obj</span>, month = <span>number/int</span> , year = <span>number/int</span>) {}</div>
+                <div>function createCalendar() {}</div>
+                <div>function getCurrentMonth() {}</div>
+                <div>function getNextMonth() {}</div>
+                <div>function getLastMonth() {}</div>
+                <div>function getCurrentYear() {}</div>
+                <div>function last() {}</div>
+                <div>function next() {}</div>
+                <div>function fillTitle(date = <span>date obj</span>, month = <span>number/int</span> , year = <span>number/int</span>) {}</div>
+                <div>function fillFooter() {}</div>
+            </div>
+
+            <h1>Extra Info</h1>
+            <div class='infoDiv'>
+                <div>There are some event function I started but was unable to finish due to time. Feel free to mess with it. You might find it really cool.</div>
+            </div>
+
+
+
+        </div>
+        <div id="bod"></div>
+        <div id="foot"></div>
+    </div>
+
 
     <script src="script.js"></script>
 </body>

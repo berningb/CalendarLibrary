@@ -1,7 +1,8 @@
-#calendar {
+#calendar,
+#back {
     height: auto;
     width: 800px;
-    /*    background-color: red;*/
+    background-color: red;
     margin: auto;
     border: 1px solid black;
     background-color: #2B4450;
@@ -20,13 +21,10 @@ td {
 
 .btn:hover {
     cursor: pointer;
-    color: red;
+    color: navajowhite;
 }
 
-.first {
-    /*    background-color: deepskyblue;*/
-    border-radius: 100%;
-}
+.first {}
 
 .notThisMonth {
     color: grey;
@@ -34,7 +32,7 @@ td {
 
 .notThisMonth:hover {
     cursor: pointer;
-    color: red;
+    color: lightgrey;
 }
 
 .title {
@@ -90,4 +88,123 @@ th {
     height: 100px;
     width: auto;
     font-size: 2.6em;
+    border-top: 1px solid grey;
+    color: white;
+}
+
+.circle {
+    height: 8px;
+    width: 8px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    border-radius: 100%;
+    background-color: orange;
+}
+
+#input {
+    width: 100%;
+    background-color: transparent;
+    font-size: 2.3em;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border: 0px;
+    border-bottom: 1px solid white;
+}
+
+
+/*******************************************/
+
+#calendar {
+    position: relative;
+    float: left;
+    width: 800px;
+    height: 860px;
+    text-align: center;
+    margin: auto;
+    border: 1px solid black;
+    background-color: #2B4450;
+    font-family: "Arial Black", Gadget, sans-serif;
+    -webkit-user-select: none;
+}
+
+#calendar:nth-child(1) {
+    margin-left: -3px;
+    margin-right: 1px;
+}
+
+#calendar:nth-child(2),
+#calendar:nth-child(3) {
+    margin-right: 1px;
+}
+
+.infoDiv {
+    width: 45%;
+    height: auto;
+    background-color: bisque;
+    color: black;
+    font-size: 2.3em;
+    margin-bottom: 100px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 3em;
+    width: 845%;
+}
+
+span {
+    color: red;
+}
+
+.nmonth {
+    float: right;
+    margin-right: 40px;
+    padding-top: 15px;
+}
+
+.lmonth {
+    float: left;
+    margin-left: 40px;
+    padding-top: 15px;
+}
+
+
+/* card fronts and backs */
+
+#front,
+#back {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#front,
+#back {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: -webkit-transform 0.3s;
+    transition: transform 0.3s;
+}
+
+#back {
+    background-color: #1e1e1e;
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+
+
+/* click effect */
+
+#calendar.effect__click.flipped #front {
+    -webkit-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+}
+
+#calendar.effect__click.flipped #back {
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
 }
