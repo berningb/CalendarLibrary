@@ -31,60 +31,43 @@ var months = [
     'November',
     'December'
 ];
+
+var monthabr = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sept',
+    'Oct',
+    'Nov',
+    'Dec'
+];
+
+var yearsAhead = 0;
 var d = new Date();
 var mn = d.getMonth() + 1;
+
+var day = d.getDate();
+
+
+var title = document.createElement("div");
+title.className = 'title';
+title.id = 'myTitle';
+
+var footer = document.createElement('div');
+footer.className = 'footer';
+footer.id = 'myFooter';
 
 var table = document.createElement("TABLE");
 table.id = 'table';
 table.style.width = '100%';
 
-var footer = document.createElement('div');
-footer.className = 'footer';
-
-var nxt = document.createElement("BUTTON");
-nxt.innerHTML = '&#x276f;';
-nxt.id = 'nxt';
-nxt.className = 'btn2';
-
 var circle = document.createElement('div');
 circle.className = 'circle';
-
-var displayDay = document.createElement('div');
-displayDay.className = "displayDay";
-var displayMonth = document.createElement('div');
-displayMonth.className = "displayMonth";
-
-
-nxt.addEventListener("click", function () {
-    console.log(mn);
-    if (mn === 12) {
-        makeDays(new Date(), 12)
-    } else {
-        mn++;
-        makeDays(new Date(), mn);
-    }
-});
-
-
-var prv = document.createElement("BUTTON");
-prv.innerHTML = '&#x276e;';
-prv.id = 'prv';
-prv.className = 'btn2';
-prv.addEventListener("click", function () {
-    console.log(mn);
-
-    if (mn === 1) {
-        makeDays(new Date(), 1)
-    } else {
-        mn--;
-        makeDays(new Date(), mn);
-    }
-});
-
-var title = document.createElement("div");
-
-
-title.className = 'title';
 
 var front = document.createElement('div');
 front.id = 'front';
@@ -95,46 +78,41 @@ back.id = 'back';
 var flipper = document.createElement('div');
 flipper.id = 'flipper';
 
+var nxt = document.createElement("BUTTON");
+nxt.innerHTML = '&#x276f;';
+nxt.id = 'nxt';
+nxt.className = 'btn2';
+nxt.addEventListener('click', next);
+
+var prv = document.createElement("BUTTON");
+prv.innerHTML = '&#x276e;';
+prv.id = 'prv';
+prv.className = 'btn2';
+prv.addEventListener('click', last)
+
+var displayDay = document.createElement('div');
+var displayMonth = document.createElement('div');
 
 function Calendar(id, date) {
     var cal = document.getElementById('calendar');
-    var currentMonth = date.getMonth() + 1;
+    var currentMonth = getLastMonth(date);
     createCalendar();
-    makeDays(date, currentMonth);
-    addBack(date);
-
+    fillTitle(date, getCurrentMonth(), getCurrentYear(date));
+    fillFooter();
+    fillCalendar(date, getCurrentMonth(), getCurrentYear(date));
 }
 
-function makeDays(date, month) {
-
-    //get date 
-    var day = date.getDate();
-    var year = date.getFullYear();
-    var first = new Date(year + "-" + month + "-01").getDay();
-    var last = new Date(year, month, 0).getDate();
-    var lastDayOfLastMonth = new Date(year, month - 1, 0).getDate();
-
-
-    //get next and last month
-    var x = new Date();
-    x.setMonth(x.getMonth());
-    var lastMonth = x.getMonth();
-    var nextMonth = x.getMonth() + 1;
-
-    //get days
+function fillCalendar(date, month, year) {
     var count = 0;
     var count2 = 1;
     var end = 1;
-
+    var last = new Date(year, month, 0).getDate();
+    var first = new Date(year + "-" + month + "-01").getDay();
+    var lastDayOfLastMonth = new Date(year, month - 1, 0).getDate();
     var prev = lastDayOfLastMonth - first + 1;
-    displayMonth.innerHTML = months[month - 1] + " " + year;
-    displayDay.innerHTML = weekday[date.getDay()] + " " + day;
-    title.appendChild(displayDay);
-    title.appendChild(displayMonth);
-
-    footer.appendChild(prv);
-    footer.appendChild(nxt);
     var x = new Date();
+
+
     var table = document.getElementById('table');
     for (var i = 1, row; row = table.rows[i]; i++) {
         for (var j = 0, cell; cell = row.cells[j]; j++) {
@@ -165,7 +143,6 @@ function makeDays(date, month) {
                     cell.className = 'notThisMonth';
                     cell.onclick = function () {
                         month++;
-                        makeDays(new Date(), month);
                     }
                     end++
                 }
@@ -179,13 +156,9 @@ function createCalendar() {
     for (var j = 0; j < 7; j++) {
         var tbd = document.createElement('th');
         tbd.innerHTML = days[j];
-        console.log(days[j]);
         header.appendChild(tbd);
     }
     table.appendChild(header);
-
-
-
     for (var i = 0; i < 6; i++) {
         var tbr = document.createElement('tr');
         for (var j = 0; j < 7; j++) {
@@ -196,11 +169,69 @@ function createCalendar() {
     }
 }
 
-
-function addBack(theDate) {
-
-
+function getCurrentMonth() {
+    var d = new Date();
+    var date = d.getMonth() + 1;
+    return date;
 }
+
+function getNextMonth(date) {
+    var gnm = getCurrentMonth() + 2;
+    return gnm;
+}
+
+function getLastMonth(date) {
+    var glm = getCurrentMonth() - 2;
+    return glm;
+}
+
+function getCurrentYear() {
+    var gny = d.getFullYear() + yearsAhead;
+    return gny;
+}
+
+function last() {
+    if (mn === 1) {
+        yearsAhead--;
+        fillTitle(d, 12, getCurrentYear());
+        fillCalendar(d, 12, getCurrentYear());
+        mn = 12;
+    } else {
+        mn--;
+        fillTitle(d, mn, getCurrentYear());
+        fillCalendar(d, mn, getCurrentYear());
+    }
+}
+
+function next() {
+    if (mn === 12) {
+        yearsAhead++;
+        fillTitle(d, 1, getCurrentYear());
+        fillCalendar(d, 1, getCurrentYear());
+        mn = 1;
+    } else {
+        mn++;
+        fillTitle(d, mn, getCurrentYear());
+        fillCalendar(d, mn, getCurrentYear());
+    }
+}
+
+
+function fillTitle(date, month, year) {
+    displayDay.className = "displayDay";
+    displayMonth.className = "displayMonth";
+    displayMonth.innerHTML = monthabr[month - 1] + " " + year;
+    displayDay.innerHTML = weekday[date.getDay()] + " " + day;
+    title.appendChild(displayDay);
+    title.appendChild(displayMonth);
+}
+
+function fillFooter() {
+    footer.appendChild(prv);
+    footer.appendChild(nxt);
+}
+
+
 document.getElementById('calendar').appendChild(flipper);
 document.getElementById('flipper').appendChild(front);
 document.getElementById('flipper').appendChild(back);

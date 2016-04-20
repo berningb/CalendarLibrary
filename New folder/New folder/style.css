@@ -30,6 +30,10 @@ td {
     color: grey;
 }
 
+.btn {
+    
+}
+
 .notThisMonth:hover {
     cursor: pointer;
     color: red;
