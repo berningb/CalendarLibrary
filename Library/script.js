@@ -163,10 +163,11 @@ function fillCalendar(date, month, year) {
                                                 cell.onclick = function () {
                                    var x = front.classList;
                                    var cards = document.querySelectorAll("#calendar.effect__click");
-                                   for (var i = 0, len = cards.length; i < len; i++) {
-                                       var card = cards[i];
-                                       clickListener(card);
-                                   }                      }
+//                                   for (var i = 0, len = cards.length; i < len; i++) {
+//                                       var card = cards[i];
+//                                       clickListener(card);
+//                                   }
+                                                }
                     }
                 } else {
                     cell.innerHTML = end;
@@ -281,12 +282,12 @@ function fillFooter(date, month, year) {
     footer.appendChild(nMonth);
 }
 
-function clickListener(card) {
-    card.addEventListener("click", function () {
-        var c = this.classList;
-        c.contains("flipped") === true ? c.remove("flipped") : c.add("flipped");
-    });
-}
+//function clickListener(card) {
+//    card.addEventListener("click", function () {
+//        var c = this.classList;
+//        c.contains("flipped") === true ? c.remove("flipped") : c.add("flipped");
+//    });
+//}
 
 document.getElementById('calendar').appendChild(front);
 document.getElementById('calendar').appendChild(back);
