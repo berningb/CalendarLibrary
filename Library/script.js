@@ -158,6 +158,7 @@ function fillCalendar(date, month, year) {
                         cell.innerHTML = count2;
                         count2++;
                         cell.id = 'cell' + (count2 - 1);
+
                         //                                                cell.onclick = function () {
                         //                                   var x = front.classList;
                         //                                   var cards = document.querySelectorAll("#calendar.effect__click");
@@ -165,6 +166,7 @@ function fillCalendar(date, month, year) {
                         //                                       var card = cards[i];
                         //                                       clickListener(card);
                         //                                   }                      }
+
                     }
                 } else {
                     cell.innerHTML = end;
@@ -278,7 +280,6 @@ function fillFooter(date, month, year) {
     footer.appendChild(lMonth);
     footer.appendChild(nMonth);
 }
-//
 //function clickListener(card) {
 //    card.addEventListener("click", function () {
 //        var c = this.classList;

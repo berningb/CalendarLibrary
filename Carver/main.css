@@ -1,0 +1,64 @@
+body {
+    position: relative;
+    font-family: 'Source Sans Pro', sans-serif;
+    padding: 110px;
+    text-align: center;
+}
+
+.navbar {
+    background-color: #4CAF50;
+    padding: 15px 15px;
+    border-color: transparent;
+}
+
+h3 {
+    color: #B9F6CA;
+}
+
+.navbar-toggle {
+    color: red;
+}
+
+.navbar-toggle:hover, .navbarinverse .navbar-toggle:focus {
+    background-color: #A5D6A7;
+}
+
+.navbar .navbar-nav>li>a {
+    color:#FFF;
+}
+
+.navbar .navbar-nav>li>a:hover, .navbar .navbar-nav>li>a:focus {
+    background-color: #A5D6A7;
+}
+
+.filler {
+    height: 200px;
+    background-color: gray;
+}
+
+td {
+  background-color: lightgreen;
+  foreground-color: white;
+}
+
+th {
+  background-color: green;
+}
+
+.title {
+  background-color: green;
+  border-bottom: lightgreen;
+  margin-bottom: 0px;
+}
+
+.footer {
+  background-color: green;
+}
+
+.btn {
+  color: white;
+}
+
+.notThisMonth {
+  color: gray;
+}
